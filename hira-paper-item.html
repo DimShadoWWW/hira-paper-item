@@ -1,0 +1,111 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="hira-paper-item-behavior.html">
+<link rel="import" href="hira-paper-item-shared-styles.html">
+
+<!--
+Material design: [Lists](https://www.google.com/design/spec/components/lists.html)
+
+`<hira-paper-item>` is an interactive list item. By default, it is a horizontal flexbox.
+
+    <hira-paper-item>Item</hira-paper-item>
+
+Use this element with `<hira-paper-item-body>` to make Material Design styled two-line and three-line
+items.
+
+    <hira-paper-item>
+      <hira-paper-item-body two-line>
+        <div>Show your status</div>
+        <div secondary>Your status is visible to everyone</div>
+      </hira-paper-item-body>
+      <iron-icon icon="warning"></iron-icon>
+    </hira-paper-item>
+
+To use `hira-paper-item` as a link, wrap it in an anchor tag. Since `hira-paper-item` will
+already receive focus, you may want to prevent the anchor tag from receiving
+focus as well by setting its tabindex to -1.
+
+    <a href="https://www.polymer-project.org/" tabindex="-1">
+      <hira-paper-item raised>Polymer Project</hira-paper-item>
+    </a>
+
+If you are concerned about performance and want to use `hira-paper-item` in a `hira-paper-listbox`
+with many items, you can just use a native `button` with the `hira-paper-item` class
+applied (provided you have correctly included the shared styles):
+
+    <style is="custom-style" include="hira-paper-item-shared-styles"></style>
+
+    <hira-paper-listbox>
+      <button class="hira-paper-item" role="option">Inbox</button>
+      <button class="hira-paper-item" role="option">Starred</button>
+      <button class="hira-paper-item" role="option">Sent mail</button>
+    </hira-paper-listbox>
+
+### Styling
+
+The following custom properties and mixins are available for styling:
+
+Custom property               | Description                                  | Default
+------------------------------|----------------------------------------------|----------
+`--paper-item-min-height`     | Minimum height of the item                   | `48px`
+`--paper-item`                | Mixin applied to the item                    | `{}`
+`--paper-item-selected-weight`| The font weight of a selected item           | `bold`
+`--paper-item-selected`       | Mixin applied to selected hira-paper-items        | `{}`
+`--paper-item-disabled-color` | The color for disabled hira-paper-items           | `--disabled-text-color`
+`--paper-item-disabled`       | Mixin applied to disabled hira-paper-items        | `{}`
+`--paper-item-focused`        | Mixin applied to focused hira-paper-items         | `{}`
+`--paper-item-focused-before` | Mixin applied to :before focused hira-paper-items | `{}`
+
+### Accessibility
+
+This element has `role="listitem"` by default. Depending on usage, it may be more appropriate to set
+`role="menuitem"`, `role="menuitemcheckbox"` or `role="menuitemradio"`.
+
+    <hira-paper-item role="menuitemcheckbox">
+      <hira-paper-item-body>
+        Show your status
+      </hira-paper-item-body>
+      <hira-paper-checkbox></hira-paper-checkbox>
+    </hira-paper-item>
+
+@group Paper Elements
+@element hira-paper-item
+@demo demo/index.html
+-->
+
+<dom-module id="hira-paper-item">
+  <template>
+    <style include="hira-paper-item-shared-styles"></style>
+    <style>
+      :host {
+        @apply(--layout-horizontal);
+        @apply(--layout-center);
+        @apply(--paper-font-subhead);
+
+        @apply(--paper-item);
+      }
+    </style>
+
+    <content></content>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'hira-paper-item',
+
+      behaviors: [
+        Polymer.PaperItemBehavior
+      ]
+    });
+  </script>
+</dom-module>
